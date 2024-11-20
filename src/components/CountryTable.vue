@@ -20,25 +20,20 @@
         </tbody>
       </table>
   
-      <!-- Details Table -->
+      <!-- Drill-Down Details -->
       <div v-if="selectedCountry">
         <h3>Details for {{ getCountryName(selectedCountry) }}</h3>
         <table>
           <thead>
             <tr>
-              <!-- Use a computed property to get the headers -->
               <th v-for="key in tableHeaders" :key="key">
                 {{ key === 'countrycode' ? 'Country' : key }}
               </th>
             </tr>
           </thead>
           <tbody>
-            <tr
-              v-for="(item, index) in groupedData[selectedCountry]"
-              :key="index"
-            >
+            <tr v-for="(item, index) in groupedData[selectedCountry]" :key="index">
               <td v-for="key in tableHeaders" :key="key">
-                <!-- Replace country codes with full names -->
                 <span v-if="key === 'countrycode'">
                   {{ getCountryName(item[key]) }}
                 </span>
@@ -79,14 +74,15 @@
         }, {});
       },
       toggleCountry(countryCode) {
+        console.log('Row clicked:', countryCode);
         this.selectedCountry =
           this.selectedCountry === countryCode ? null : countryCode;
+        console.log('Selected Country:', this.selectedCountry);
       },
       getCountryName(code) {
         return countryCodeMap[code] || code;
       },
       setTableHeaders() {
-        // Get the keys from the first item to use as table headers
         if (this.data.length > 0) {
           this.tableHeaders = Object.keys(this.data[0]);
         }
@@ -108,6 +104,7 @@
   td {
     border: 1px solid #ccc;
     padding: 8px;
+    text-align: left;
   }
   tr:hover {
     background-color: #f1f1f1;
