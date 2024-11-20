@@ -1,4 +1,3 @@
-<!-- src/components/BarChart.vue -->
 <template>
   <Bar :chart-data="chartData" :options="chartOptions" />
 </template>

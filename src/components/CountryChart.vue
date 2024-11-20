@@ -2,11 +2,12 @@
   <div class="modal-container">
     <h2>Data Visualization by Country</h2>
     <div v-if="loading">Loading...</div>
-    <BarChart
-      v-else
-      :chart-data="chartData"
-      :chart-options="chartOptions"
-    />
+    <div v-else>
+      <BarChart
+        :chart-data="chartData"
+        :chart-options="chartOptions"
+      />
+    </div>
   </div>
 </template>
 
@@ -86,6 +87,5 @@ export default defineComponent({
 <style scoped>
 .modal-container {
   padding: 20px;
-  height: 400px;
 }
 </style>
