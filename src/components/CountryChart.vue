@@ -1,50 +1,31 @@
 <template>
-  <div class="modal-container">
-    <h2>Data Visualization by Country</h2>
-    <div v-if="loading">Loading...</div>
-    <div v-else>
-      <BarChart
-        :chart-data="chartData"
-        :chart-options="chartOptions"
-      />
-    </div>
+  <div>
+    <h1>Articles by Country</h1>
+    <BarChart v-if="chartData" :chart-data="chartData" :chart-options="chartOptions" />
   </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
 import BarChart from './BarChart.vue';
-import { getData } from '../services/api';
-import { countryCodeMap } from '../services/countryCodes';
+import { getData } from '../services/api'; // Fetch your sample data from an API or a file
 
-export default defineComponent({
-  name: 'CountryChart',
+export default {
   components: {
     BarChart,
   },
   data() {
     return {
-      loading: true,
-      rawData: [],
-      chartData: {
-        labels: [],
-        datasets: [
-          {
-            label: 'Articles by Country',
-            backgroundColor: '#42b983',
-            data: [],
-          },
-        ],
-      },
+      rawData: [], // Raw data from the API
+      chartData: null, // Processed data for the chart
       chartOptions: {
         responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              stepSize: 1,
-            },
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Articles by Country',
           },
         },
       },
@@ -53,39 +34,35 @@ export default defineComponent({
   methods: {
     async fetchData() {
       try {
-        this.loading = true;
-        const data = await getData();
-        this.rawData = data;
-        this.updateChartData();
+        this.rawData = await getData();
+        this.processData();
       } catch (error) {
         console.error('Error fetching data:', error);
-      } finally {
-        this.loading = false;
       }
     },
-    updateChartData() {
-      // Group by country
-      const countryCounts = this.rawData.reduce((acc, item) => {
-        const countryCode = item.countrycode || 'Unknown';
-        acc[countryCode] = (acc[countryCode] || 0) + 1;
+    processData() {
+      // Group data by country
+      const grouped = this.rawData.reduce((acc, item) => {
+        const country = item.countrycode || 'Unknown';
+        acc[country] = (acc[country] || 0) + 1;
         return acc;
       }, {});
 
-      // Update chart data properties directly
-      this.chartData.labels = Object.keys(countryCounts).map(
-        (code) => countryCodeMap[code] || code
-      );
-      this.chartData.datasets[0].data = Object.values(countryCounts);
+      // Prepare chartData
+      this.chartData = {
+        labels: Object.keys(grouped),
+        datasets: [
+          {
+            label: 'Number of Articles',
+            data: Object.values(grouped),
+            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'], // Example colors
+          },
+        ],
+      };
     },
   },
   async created() {
     await this.fetchData();
   },
-});
+};
 </script>
-
-<style scoped>
-.modal-container {
-  padding: 20px;
-}
-</style>

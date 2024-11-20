@@ -1,5 +1,5 @@
 <template>
-  <Bar :chart-data="chartData" :options="chartOptions" />
+  <Bar :data="chartData" :options="chartOptions" />
 </template>
 
 <script>
@@ -15,7 +15,7 @@ import {
   LinearScale,
 } from 'chart.js';
 
-// Register the required components
+// Register Chart.js components
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
 export default defineComponent({
@@ -35,7 +35,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-/* Add any custom styles if needed */
-</style>
