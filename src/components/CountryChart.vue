@@ -1,7 +1,12 @@
 <template>
   <div class="modal-container">
     <h2>Data Visualization by Country</h2>
-    <BarChart v-if="chartData" :chart-data="chartData" :chart-options="chartOptions" />
+    <div v-if="loading">Loading...</div>
+    <BarChart
+      v-else
+      :chart-data="chartData"
+      :chart-options="chartOptions"
+    />
   </div>
 </template>
 
@@ -18,44 +23,62 @@ export default defineComponent({
   },
   data() {
     return {
-      data: [],
-      chartData: null,
+      loading: true,
+      rawData: [],
+      chartData: {
+        labels: [],
+        datasets: [
+          {
+            label: 'Articles by Country',
+            backgroundColor: '#42b983',
+            data: [],
+          },
+        ],
+      },
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              stepSize: 1,
+            },
+          },
+        },
       },
     };
   },
   methods: {
     async fetchData() {
-      this.data = await getData();
-      this.prepareChartData();
+      try {
+        this.loading = true;
+        const data = await getData();
+        this.rawData = data;
+        this.updateChartData();
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        this.loading = false;
+      }
     },
-    prepareChartData() {
-      const countryCounts = this.data.reduce((acc, item) => {
+    updateChartData() {
+      // Group by country
+      const countryCounts = this.rawData.reduce((acc, item) => {
         const countryCode = item.countrycode || 'Unknown';
         acc[countryCode] = (acc[countryCode] || 0) + 1;
         return acc;
       }, {});
 
-      const labels = Object.keys(countryCounts).map(
+      // Update chart data properties directly
+      this.chartData.labels = Object.keys(countryCounts).map(
         (code) => countryCodeMap[code] || code
       );
-
-      this.chartData = {
-        labels: labels,
-        datasets: [
-          {
-            label: 'Number of Entries',
-            backgroundColor: '#42b983',
-            data: Object.values(countryCounts),
-          },
-        ],
-      };
+      this.chartData.datasets[0].data = Object.values(countryCounts);
     },
   },
-  created() {
-    this.fetchData();
+  async created() {
+    await this.fetchData();
   },
 });
 </script>
@@ -63,7 +86,6 @@ export default defineComponent({
 <style scoped>
 .modal-container {
   padding: 20px;
-  box-sizing: border-box;
-  margin: 60px;
+  height: 400px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <div id="app" class="p-6">
-    <header class="bg-blue-500 p-6">
+  <div id="app">
+    <header class="bg-blue-500 py-6">
     <h1 class="text-3xl font-bold mb-4 text-white">Fancensus Data Visualization</h1>
     <div class="mb-4">
       <button @click="currentView = 'CountryTable'" class="btn">Country Table</button>
@@ -16,8 +16,7 @@
     </div>
     <div v-if="currentView === 'CountryChart'">
       <CountryChart />
-    </div>
-    <div class="bg-red-500 text-white p-4 mt-4">Test Tailwind CSS</div>
+    </div>    
   </div>
 </template>
 

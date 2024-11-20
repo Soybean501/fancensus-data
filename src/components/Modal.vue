@@ -38,7 +38,3 @@ export default {
     },
 };
 </script>
-
-<style scoped>
-/* If you need additional styles */
-</style>

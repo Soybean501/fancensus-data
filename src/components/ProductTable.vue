@@ -1,6 +1,6 @@
 <template>
-    <div>
-      <h2>Data Grouped by Product</h2>
+    <div class="p-6">
+      <h2 class="text-2xl font-semibold mb-4">Data Grouped by Product</h2>
       <table>
         <thead>
           <tr>
