@@ -1,11 +1,13 @@
 <template>
-  <div id="app">
-    <h1>Fancensus Data Visualization</h1>
-    <div>
-      <button @click="currentView = 'CountryTable'">Country Table</button>
-      <button @click="currentView = 'ProductTable'">Product Table</button>
-      <button @click="currentView = 'CountryChart'">Country Chart</button>
+  <div id="app" class="p-6">
+    <header class="bg-blue-500 p-6">
+    <h1 class="text-3xl font-bold mb-4 text-white">Fancensus Data Visualization</h1>
+    <div class="mb-4">
+      <button @click="currentView = 'CountryTable'" class="btn">Country Table</button>
+      <button @click="currentView = 'ProductTable'" class="btn">Product Table</button>
+      <button @click="currentView = 'CountryChart'" class="btn">Country Chart</button>
     </div>
+  </header>
     <div v-if="currentView === 'CountryTable'">
       <CountryTable />
     </div>
@@ -15,6 +17,7 @@
     <div v-if="currentView === 'CountryChart'">
       <CountryChart />
     </div>
+    <div class="bg-red-500 text-white p-4 mt-4">Test Tailwind CSS</div>
   </div>
 </template>
 
@@ -37,21 +40,21 @@ export default {
 };
 </script>
 
-<style>
-body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-}
-
-button {
+<style scoped>
+.btn {
   margin: 5px;
-  padding: 10px;
+  padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  background-color: #3490dc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
 }
 
-button:hover {
-  background-color: #f0f0f0;
+.btn:hover {
+  background-color: #2779bd;
 }
 
 #app {

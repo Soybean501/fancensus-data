@@ -1,11 +1,11 @@
 <template>
     <div>
-      <h2>Data Grouped by Country</h2>
-      <table>
+      <h2 class="text-2xl font-semibold mb-4">Data Grouped by Country</h2>
+      <table class="min-w-full border-collapse">
         <thead>
           <tr>
-            <th>Country</th>
-            <th>Number of Entries</th>
+            <th class="px-4 py-2 border">Country</th>
+            <th class="px-4 py-2 border">Number of Entries</th>
           </tr>
         </thead>
         <tbody>
@@ -13,27 +13,43 @@
             v-for="(items, countryCode) in groupedData"
             :key="countryCode"
             @click="toggleCountry(countryCode)"
+            class="cursor-pointer hover:bg-gray-100"
           >
-            <td>{{ getCountryName(countryCode) }}</td>
-            <td>{{ items.length }}</td>
+            <td class="px-4 py-2 border">{{ getCountryName(countryCode) }}</td>
+            <td class="px-4 py-2 border">{{ items.length }}</td>
           </tr>
         </tbody>
       </table>
   
-      <!-- Drill-Down Details -->
-      <div v-if="selectedCountry">
-        <h3>Details for {{ getCountryName(selectedCountry) }}</h3>
-        <table>
+      <!-- Modal for Drill-Down Details -->
+      <Modal
+        v-if="selectedCountry"
+        :title="'Details for ' + getCountryName(selectedCountry)"
+        @close="selectedCountry = null"
+      >
+        <table class="min-w-full border-collapse">
           <thead>
             <tr>
-              <th v-for="key in tableHeaders" :key="key">
+              <th
+                v-for="key in tableHeaders"
+                :key="key"
+                class="px-4 py-2 border"
+              >
                 {{ key === 'countrycode' ? 'Country' : key }}
               </th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, index) in groupedData[selectedCountry]" :key="index">
-              <td v-for="key in tableHeaders" :key="key">
+            <tr
+              v-for="(item, index) in groupedData[selectedCountry]"
+              :key="index"
+              class="hover:bg-gray-50"
+            >
+              <td
+                v-for="key in tableHeaders"
+                :key="key"
+                class="px-4 py-2 border"
+              >
                 <span v-if="key === 'countrycode'">
                   {{ getCountryName(item[key]) }}
                 </span>
@@ -42,13 +58,16 @@
             </tr>
           </tbody>
         </table>
-      </div>
+      </Modal>
     </div>
   </template>
+  
   
   <script>
   import { getData } from '../services/api';
   import { countryCodeMap } from '../services/countryCodes';
+  import Modal from './Modal.vue';
+
   
   export default {
     data() {
@@ -58,6 +77,9 @@
         selectedCountry: null,
         tableHeaders: [],
       };
+    },
+    components: {
+        Modal,
     },
     methods: {
       async fetchData() {
