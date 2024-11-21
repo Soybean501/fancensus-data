@@ -1,3 +1,6 @@
+<!-- BarChart Component
+    This component displays a bar chart using the Chart.js library.
+-->
 <template>
   <Bar :data="chartData" :options="chartOptions" />
 </template>

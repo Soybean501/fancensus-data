@@ -1,3 +1,7 @@
+<!-- LineChart Component
+    This component displays a line chart using the Chart.js library.
+    **Note:** This component is not currently used in the application.
+-->
 <template>
     <Line :data="chartData" :options="chartOptions" />
   </template>
@@ -35,9 +39,5 @@
       },
     },
   });
-  </script>
-  
-  <style scoped>
-  /* Add custom styles if needed */
-  </style>
+  </script> 
   

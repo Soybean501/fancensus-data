@@ -1,3 +1,6 @@
+/**
+ * Map of country codes to country names.
+ */
 export const countryCodeMap = {
     UK: 'United Kingdom',
     DE: 'Germany',

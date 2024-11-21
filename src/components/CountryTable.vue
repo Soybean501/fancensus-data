@@ -1,3 +1,6 @@
+<!-- CountryTable Component
+    This component displays a table of the number of entries per country.
+-->
 <template>
     <div class="p-6">
       <h2 class="text-2xl font-semibold mb-4"> Entries per country</h2>            
@@ -86,11 +89,17 @@
         Modal,
     },
     methods: {
+      /**
+       * Fetch the data from the API and group it by country.
+       */
       async fetchData() {
         this.data = await getData();
         this.groupDataByCountry();
         this.setTableHeaders();
       },
+      /**
+       * Group the data by country.
+       */
       groupDataByCountry() {
         this.groupedData = this.data.reduce((acc, item) => {
           const countryCode = item.countrycode || 'Unknown';
@@ -99,21 +108,33 @@
           return acc;
         }, {});
       },
+      /**
+       * Toggle the selected country.
+       */
       toggleCountry(countryCode) {
         console.log('Row clicked:', countryCode);
         this.selectedCountry =
           this.selectedCountry === countryCode ? null : countryCode;
         console.log('Selected Country:', this.selectedCountry);
       },
+      /**
+       * Get the country name from the country code.
+       */
       getCountryName(code) {
         return countryCodeMap[code] || code;
       },
+      /**
+       * Set the table headers.
+       */
       setTableHeaders() {
         if (this.data.length > 0) {
           this.tableHeaders = Object.keys(this.data[0]);
         }
       },
     },
+    /**
+     * Fetch the data when the component is created.
+     */
     created() {
       this.fetchData();
     },

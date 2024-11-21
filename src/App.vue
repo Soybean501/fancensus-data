@@ -1,3 +1,6 @@
+<!-- App Component  
+    This is the main component that displays the different views of the application.
+-->
 <template>
   <div id="app">
     <header class="bg-blue-500 py-6">
@@ -50,11 +53,17 @@ export default {
       rawData: [], // Data fetched from the API
     };
   },
+  /**
+   * Get the current view component.
+   */
   computed: {
     currentViewComponent() {
       return this.currentView;
     },
   },
+  /**
+   * Fetch the data from the API when the component is created.
+   */
   async created() {
     this.rawData = await getData();
     console.log('Fetched data structure:', this.rawData);

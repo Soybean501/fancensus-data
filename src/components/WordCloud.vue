@@ -1,3 +1,6 @@
+<!-- WordCloud Compoenent 
+    This component displays a word cloud based on the frequency of words in the headlines for a selected country.
+-->
 <template>
     <div>
         <h2 class="text-2xl font-semibold mb-4">Word Cloud</h2>
@@ -35,6 +38,10 @@ export default {
         };
     },
     methods: {
+        /**
+         * Process the raw data to generate the word cloud data.
+         * Filter out stop words and generate a word cloud for each country.
+         */
         processData() {
             if (!this.rawData || this.rawData.length === 0) {
                 console.warn('No raw data available to process');
@@ -72,6 +79,9 @@ export default {
                 this.generateWordCloud();
             });
         },
+        /**
+         * Generate the word cloud for the selected country.
+         */
         generateWordCloud() {
             console.log('Generating word cloud for country:', this.selectedCountry);
             const words = Object.entries(this.wordCloudData[this.selectedCountry] || {}).map(([word, count]) => [word, count]);
@@ -85,6 +95,9 @@ export default {
         },
     },
     watch: {
+        /**
+         * Watch for changes in the selected country and generate the word cloud when it changes.
+         */
         selectedCountry() {
             this.generateWordCloud();
         },

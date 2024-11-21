@@ -1,3 +1,6 @@
+<!-- CountryChart Component
+    This component displays a bar chart of the number of articles per country.
+-->
 <template>
   <div>
     <h2 class="text-2xl font-semibold mb-4">Articles by Country</h2>
@@ -32,6 +35,9 @@ export default {
     };
   },
   methods: {
+    /**
+     * Fetch the data from the API and process it.
+     */
     async fetchData() {
       try {
         this.rawData = await getData();
@@ -40,6 +46,9 @@ export default {
         console.error('Error fetching data:', error);
       }
     },
+    /**
+     * Process the raw data to group it by country.
+     */
     processData() {
       // Group data by country
       const grouped = this.rawData.reduce((acc, item) => {
@@ -61,6 +70,9 @@ export default {
       };
     },
   },
+  /**
+   * Fetch the data when the component is created.
+   */
   async created() {
     await this.fetchData();
   },

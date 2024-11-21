@@ -1,3 +1,6 @@
+<!-- ProductTable Component
+    This component displays a table of the number of entries broken down by product name.
+-->
 <template>
     <div class="p-6">
       <h2 class="text-2xl font-semibold mb-4">Data Grouped by Product</h2>
@@ -33,10 +36,16 @@
       };
     },
     methods: {
+      /**
+       * Fetch the data from the API and group it by product name.
+       */
       async fetchData() {
         this.data = await getData();
         this.groupDataByProduct();
       },
+      /**
+       * Group the data by product name.
+       */
       groupDataByProduct() {
         const counts = this.data.reduce((acc, item) => {
           const product = item.product ? item.product.trim() : 'Unknown';
@@ -48,6 +57,9 @@
         this.productCounts = Object.entries(counts).sort((a, b) => b[1] - a[1]);
       },
     },
+    /**
+     * Fetch the data when the component is created.
+     */
     created() {
       this.fetchData();
     },
