@@ -1,3 +1,6 @@
+<!-- ProductMentions Component
+    This component displays a table of the most mentioned product for each country.
+-->
 <template>
   <div class="p-6">
     <h2 class="text-2xl font-semibold mb-4">Product Mentions by Country</h2>
@@ -48,6 +51,9 @@ export default defineComponent({
     };
   },
   methods: {
+    /**
+     * Process the raw data to group it by country and product.
+     */
     processData() {
       if (!this.rawData || this.rawData.length === 0) {
         console.warn('No raw data available to process');
@@ -76,6 +82,9 @@ export default defineComponent({
       this.selectedCountry = this.availableCountries[0];
       this.generateMostMentionedProducts();
     },
+    /**
+     * Generate the most mentioned products for each country.
+     */
     generateMostMentionedProducts() {
       this.mostMentionedProducts = this.availableCountries.map(country => {
         const products = this.productMentionsData[country];
