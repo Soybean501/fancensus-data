@@ -114,7 +114,8 @@ export default {
     width: 100%;
     height: 0;
     padding-bottom: 60%;
-    position: relative;    
+    position: relative;
+    z-index: 1;
 }
 
 #word-cloud {
@@ -123,5 +124,11 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: 0;
+}
+
+select {
+    position: relative;
+    z-index: 2;
 }
 </style>
