@@ -1,7 +1,7 @@
 <template>
     <div class="p-6">
       <h2 class="text-2xl font-semibold mb-4"> Entries per country</h2>            
-      <p>
+      <p class="mb-4">
         <i class="fas fa-info-circle ml-1 text-blue-500"></i>
         Click a row you want more info on to see all entries for that country.        
       </p>

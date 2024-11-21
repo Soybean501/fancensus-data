@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Articles by Country</h1>
+    <h2 class="text-2xl font-semibold mb-4">Articles by Country</h2>
     <BarChart v-if="chartData" :chart-data="chartData" :chart-options="chartOptions" />
   </div>
 </template>
@@ -24,7 +24,7 @@ export default {
             position: 'top',
           },
           title: {
-            display: true,
+            display: false,
             text: 'Articles by Country',
           },
         },

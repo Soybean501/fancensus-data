@@ -1,6 +1,10 @@
 <template>
     <div class="p-6">
       <h2 class="text-2xl font-semibold mb-4">Data Grouped by Product</h2>
+      <p class="mb-4">
+        <i class="fas fa-info-circle ml-1 text-blue-500"></i>
+        The table below shows the number of entries broken down by product name.       
+      </p>
       <table>
         <thead>
           <tr>
