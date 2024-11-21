@@ -23,10 +23,10 @@
       <CountryChart />
     </div>    
     <div v-if="currentView === 'WordCloud'">
-      <WordCloud />
+      <WordCloud :rawData="rawData" />
     </div>
     <div v-if="currentView === 'ProductMentions'">
-      <ProductMentions />
+      <ProductMentions :rawData="rawData" />
     </div>
   </div>
 </template>
