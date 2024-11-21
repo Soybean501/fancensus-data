@@ -10,6 +10,7 @@
         <button @click="currentView = 'ProductTable'" class="btn">Product Table</button>
         <button @click="currentView = 'CountryChart'" class="btn">Country Chart</button>
         <button @click="currentView = 'WordCloud'" class="btn">Word Cloud</button>
+        <button @click="currentView = 'ProductMentions'" class="btn">Product Mentions</button>
       </div>
     </header>
     <div v-if="currentView === 'CountryTable'">
@@ -24,6 +25,9 @@
     <div v-if="currentView === 'WordCloud'">
       <WordCloud :rawData="rawData" />
     </div>
+    <div v-if="currentView === 'ProductMentions'">
+      <ProductMentions :rawData="rawData" />
+    </div>
   </div>
 </template>
 
@@ -32,6 +36,7 @@ import CountryTable from './components/CountryTable.vue';
 import ProductTable from './components/ProductTable.vue';
 import CountryChart from './components/CountryChart.vue';
 import WordCloud from './components/WordCloud.vue';
+import ProductMentions from './components/ProductMentions.vue';
 import { getData } from './services/api';
 
 export default {
@@ -40,6 +45,7 @@ export default {
     ProductTable,
     CountryChart,    
     WordCloud,
+    ProductMentions,
   },
   data() {
     return {
@@ -49,6 +55,7 @@ export default {
         { name: 'ProductTable', label: 'Product Table' },
         { name: 'CountryChart', label: 'Country Chart' },        
         { name: 'WordCloud', label: 'Word Cloud' },
+        { name: 'ProductMentions', label: 'Product Mentions' },
       ],
       rawData: [], // Data fetched from the API
     };

@@ -2,7 +2,7 @@
     This component displays a bar chart of the number of articles per country.
 -->
 <template>
-  <div>
+  <div class="p-6">
     <h2 class="text-2xl font-semibold mb-4">Articles by Country</h2>
     <BarChart v-if="chartData" :chart-data="chartData" :chart-options="chartOptions" />
   </div>

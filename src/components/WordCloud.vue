@@ -2,7 +2,7 @@
     This component displays a word cloud based on the frequency of words in the headlines for a selected country.
 -->
 <template>
-    <div>
+    <div class="p-6">
         <h2 class="text-2xl font-semibold mb-4">Word Cloud</h2>
         <p class="font-semibold mb-4">The size of the words below correspond to the frequency in which they are mentioned in the headlines for the selected country.</p>
         <p class="font-semibold mb-4">(You can get a new randomly generated word cloud by reloading or selecting a different country)</p>
