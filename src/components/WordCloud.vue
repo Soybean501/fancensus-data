@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import WordCloud from './WordCloud';
+import WordCloud from 'wordcloud';
 import { countryCodeMap } from '../services/countryCodes';
 
 export default {
